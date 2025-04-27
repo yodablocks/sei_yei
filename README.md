@@ -42,3 +42,50 @@
 | [TVL-Materialized] Weekly Update Latest TVL | query_4281711  | https://dune.com/queries/4281711/ | [TVL] Total Value Locked    | query_4284626                | https://dune.com/queries/4284626                                    |                         |                                               | @yei /     |               |
 | [TVL] TVL Distribution                      | query_4284910  | https://dune.com/queries/4284910  | TVL(legacy with stat error) | query_4279964                | https://dune.com/queries/4279964                                    |                         |                                               | @yei /     |               |
 | temp20241203                                | query_4365656  | https://dune.com/queries/4365656  |                             | query_4261812                |                                                                     | erc20_sei.evt_Transfer  | https://dune.com/data/erc20_sei.evt_transfer  | @yei /     |               |
+
+# Table Schema
+
+table: prices.usd_forward_fill
+schema:
+| name | type |
+| --- | --- |
+| minute | timestamp(3) with time zone |
+| blockchain | varchar |
+| contract_address | varbinary |
+| decimals | integer |
+| symbol | varchar |
+| price | double |
+
+table: erc20_sei.evt_transfer
+schema:
+| name | type |
+| --- | --- |
+| contract_address | varbinary |
+| evt_tx_hash | varbinary |
+| evt_tx_from | varbinary |
+| evt_tx_to | varbinary |
+| evt_tx_index | integer |
+| evt_index | bigint |
+| evt_block_time | timestamp |
+| evt_block_number | bigint |
+| evt_block_date | date |
+| from | varbinary |
+| to | varbinary |
+| value | uint256 |
+
+table: erc20_arbitrum.evt_transfer, erc20_optimism.evt_transfer, erc20_avalanche_c.evt_transfer, erc20_polygon.evt_transfer , erc20_base.evt_transfer
+they have the same schema:
+| name | type |
+| --- | --- |
+| contract_address | varbinary |
+| evt_tx_hash | varbinary |
+| evt_tx_from | varbinary |
+| evt_tx_to | varbinary |
+| evt_tx_index | integer |
+| evt_index | bigint |
+| evt_block_time | timestamp |
+| evt_block_number | bigint |
+| evt_block_date | date |
+| from | varbinary |
+| to | varbinary |
+| value | uint256 |
